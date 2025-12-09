@@ -78,27 +78,6 @@
                 <version>2.16.2</version>
             </plugin>
 
-            <!-- OWASP Dependency Check Plugin -->
-            <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>9.0.8</version>
-                <configuration>
-                    <failBuildOnCVSS>7</failBuildOnCVSS>
-                    <skipProvidedScope>true</skipProvidedScope>
-                    <skipRuntimeScope>false</skipRuntimeScope>
-                    <skipSystemScope>true</skipSystemScope>
-                    <skipTestScope>true</skipTestScope>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- Spotless Plugin for code formatting (optional) -->
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>

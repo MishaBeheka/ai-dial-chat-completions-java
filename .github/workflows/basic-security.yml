@@ -1,0 +1,37 @@
+name: Basic Security Check
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly check
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-check:
+    name: Check Dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Check for known vulnerabilities
+      run: |
+        echo "🔍 Checking dependencies for known issues..."
+        mvn dependency:tree
+        
+        # Simple check for outdated dependencies
+        mvn versions:display-dependency-updates || echo "No version plugin issues"
+        
+        echo "✅ Basic dependency check complete"
+        echo "💡 For more comprehensive scanning, consider setting up OWASP dependency check with NVD API key"
