@@ -50,7 +50,7 @@ public class CustomDialClient extends BaseClient {
         if (response.statusCode() == 200) {
             JsonNode jsonNode = objectMapper.readTree(response.body());
             JsonNode choices = jsonNode.get("choices");
-            
+
             if (choices != null && !choices.isEmpty()) {
                 String content = choices.get(0).get("message").get("content").asText();
                 System.out.println(content);
@@ -80,7 +80,7 @@ public class CustomDialClient extends BaseClient {
                         .build();
 
                 HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-                
+
                 if (response.statusCode() == 200) {
                     return parseStreamResponse(response.body());
                 } else {
@@ -95,7 +95,7 @@ public class CustomDialClient extends BaseClient {
     private Message parseStreamResponse(String responseBody) throws IOException {
         StringBuilder content = new StringBuilder();
         String[] lines = responseBody.split("\n");
-        
+
         for (String line : lines) {
             if (line.startsWith("data: ")) {
                 String data = line.substring(6).trim();
@@ -106,7 +106,7 @@ public class CustomDialClient extends BaseClient {
                 }
             }
         }
-        
+
         System.out.println();
         return new Message(Role.AI, content.toString());
     }
@@ -114,7 +114,7 @@ public class CustomDialClient extends BaseClient {
     private String getContentSnippet(String data) throws IOException {
         JsonNode jsonNode = objectMapper.readTree(data);
         JsonNode choices = jsonNode.get("choices");
-        
+
         if (choices != null && !choices.isEmpty()) {
             JsonNode delta = choices.get(0).get("delta");
             if (delta != null && delta.has("content")) {

@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 
 public class ChatApplication {
-    
+
     public static void main(String[] args) {
         start(true);
     }
@@ -31,7 +31,7 @@ public class ChatApplication {
         } else {
             conversation.addMessage(new Message(Role.SYSTEM, Constants.DEFAULT_SYSTEM_PROMPT));
             System.out.println("ℹ️ No System prompt provided. Will be used default System prompt: '" +
-                             Constants.DEFAULT_SYSTEM_PROMPT + "'");
+                    Constants.DEFAULT_SYSTEM_PROMPT + "'");
         }
 
         System.out.println();

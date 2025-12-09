@@ -20,5 +20,6 @@ public abstract class BaseClient {
     }
 
     public abstract Message getCompletion(List<Message> messages) throws Exception;
+
     public abstract CompletableFuture<Message> streamCompletion(List<Message> messages);
 }
